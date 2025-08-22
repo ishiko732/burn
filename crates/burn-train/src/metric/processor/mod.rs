@@ -1,3 +1,4 @@
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 mod async_wrapper;
 mod base;
 mod full;
@@ -10,8 +11,38 @@ pub(crate) use metrics::*;
 
 #[cfg(test)]
 pub(crate) use minimal::*;
-
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use async_wrapper::AsyncProcessor;
+
+
+#[cfg(not(all(feature = "sys-metrics", not(target_arch = "wasm32"))))]
+pub struct AsyncProcessor<P> (pub P);
+
+#[cfg(not(all(feature = "sys-metrics", not(target_arch = "wasm32"))))]
+impl<P> AsyncProcessor<P> {
+    #[inline]
+    pub fn new(inner: P) -> Self {
+        Self(inner)
+    }
+}
+
+#[cfg(not(all(feature = "sys-metrics", not(target_arch = "wasm32"))))]
+impl<P: EventProcessor> EventProcessor for AsyncProcessor<P> {
+    type ItemTrain = P::ItemTrain;
+    type ItemValid = P::ItemValid;
+
+    #[inline]
+    fn process_train(&mut self, event: Event<Self::ItemTrain>) {
+        self.0.process_train(event)
+    }
+
+    #[inline]
+    fn process_valid(&mut self, event: Event<Self::ItemValid>) {
+        self.0.process_valid(event)
+    }
+}
+
+
 
 #[cfg(test)]
 pub(crate) mod test_utils {

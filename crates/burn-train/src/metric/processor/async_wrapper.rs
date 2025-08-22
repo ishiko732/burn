@@ -1,3 +1,4 @@
+#![cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 use super::{Event, EventProcessor};
 use async_channel::{Receiver, Sender};
 

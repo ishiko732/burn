@@ -1,3 +1,4 @@
+#![cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 use super::{MetricMetadata, Numeric};
 use crate::metric::{Metric, MetricEntry};
 use std::time::{Duration, Instant};
