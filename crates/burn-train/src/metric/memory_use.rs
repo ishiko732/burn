@@ -1,3 +1,4 @@
+#![cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 /// RAM use metric
 use super::{MetricMetadata, Numeric};
 use crate::metric::{Metric, MetricEntry};

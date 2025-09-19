@@ -4,21 +4,21 @@ pub mod state;
 pub mod store;
 
 // System metrics
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 mod cpu_temp;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 mod cpu_use;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 mod cuda;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 mod memory_use;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use cpu_temp::*;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use cpu_use::*;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use cuda::*;
-#[cfg(feature = "sys-metrics")]
+#[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use memory_use::*;
 
 // Training metrics
