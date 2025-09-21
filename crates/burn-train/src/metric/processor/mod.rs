@@ -9,14 +9,13 @@ pub use base::*;
 pub(crate) use full::*;
 pub(crate) use metrics::*;
 
-#[cfg(test)]
-pub(crate) use minimal::*;
 #[cfg(all(feature = "sys-metrics", not(target_arch = "wasm32")))]
 pub use async_wrapper::AsyncProcessor;
-
+#[cfg(test)]
+pub(crate) use minimal::*;
 
 #[cfg(not(all(feature = "sys-metrics", not(target_arch = "wasm32"))))]
-pub struct AsyncProcessor<P> (pub P);
+pub struct AsyncProcessor<P>(pub P);
 
 #[cfg(not(all(feature = "sys-metrics", not(target_arch = "wasm32"))))]
 impl<P> AsyncProcessor<P> {
@@ -41,8 +40,6 @@ impl<P: EventProcessor> EventProcessor for AsyncProcessor<P> {
         self.0.process_valid(event)
     }
 }
-
-
 
 #[cfg(test)]
 pub(crate) mod test_utils {
