@@ -1,3 +1,8 @@
+
+fsrs-rs has removed its dependency on Burn, so @open-spaced-repetition/binding no longer requires Burn.
+
+https://github.com/open-spaced-repetition/fsrs-rs/pull/411
+
 <div align="center">
 <img src="https://raw.githubusercontent.com/tracel-ai/burn/main/assets/logo-burn-neutral.webp" width="350px"/>
 
